@@ -22,6 +22,7 @@ protocol CustomBottomSheetViewControllerProtocol {
 
 class CustomBottomSheetViewController: UIViewController {
     
+    @IBOutlet weak var touchView: UIView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var containerViewHeightConstraint: NSLayoutConstraint!
     
@@ -35,8 +36,22 @@ class CustomBottomSheetViewController: UIViewController {
         containerView.addGestureRecognizer(pan)
         containerView.layer.cornerRadius = CORNER_RADIUS
         containerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        
+        addTapGesture()
         // Do any additional setup after loading the view.
     }
+    
+    func addTapGesture() {
+        let tapGest = UITapGestureRecognizer(target: self, action: #selector(removeBottomSheet))
+        touchView.addGestureRecognizer(tapGest)
+        touchView.isUserInteractionEnabled = true
+    }
+    
+    @objc func removeBottomSheet() {
+        dismissWithAnimation()
+    }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -79,17 +94,22 @@ class CustomBottomSheetViewController: UIViewController {
             sender.setTranslation(CGPoint.zero, in: view)
         case .ended,.cancelled:
             if containerViewHeightConstraint.constant < DISMISSABLE_HEIGHT {
-                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.4, options: .curveEaseIn, animations: {
-                    self.containerViewHeightConstraint.constant = 0
-                    self.view.layoutIfNeeded()
-                }, completion: {_ in
-                    self.delegate?.didDismissed()
-                    self.dismiss(animated: false)
-                })
+                self.dismissWithAnimation()
             }
         default:
             break
         }
+    }
+    
+    private func dismissWithAnimation() {
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseIn, animations: {
+            self.containerViewHeightConstraint.constant = 0
+            self.view.layoutIfNeeded()
+        }, completion: {_ in
+            self.delegate?.didDismissed()
+            DIMMED_VIEW.removeFromSuperview()
+            self.dismiss(animated: false)
+        })
     }
     
 }

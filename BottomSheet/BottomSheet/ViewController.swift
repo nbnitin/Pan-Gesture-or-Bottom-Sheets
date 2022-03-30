@@ -7,6 +7,8 @@
 
 import UIKit
 
+let DIMMED_VIEW : UIView = UIView()
+
 class ViewController: UIViewController,UISheetPresentationControllerDelegate,CustomBottomSheetViewControllerProtocol {
 
     @IBOutlet weak var backgroundView: UIView!
@@ -18,14 +20,8 @@ class ViewController: UIViewController,UISheetPresentationControllerDelegate,Cus
     }
     
     @IBAction func showCustomBottomSheetAction(_ sender: Any) {
-        backgroundView.isHidden = false
-        let vc = self.storyboard?.instantiateViewController(identifier: "customBottomSheet") as! CustomBottomSheetViewController
-        vc.delegate = self
-        vc.bottomSheetType = .MEDIUM
-        modalPresentationStyle = .overCurrentContext
-        present(vc, animated: true, completion: {
-            //self.backgroundView.isHidden = true
-        })
+        //backgroundView.isHidden = false
+        showBottomSheet(delegate: self)
     }
     
    
@@ -71,5 +67,36 @@ class ViewController: UIViewController,UISheetPresentationControllerDelegate,Cus
     
 
     
+}
+
+extension UIViewController {
+    
+    
+    
+    func showBottomSheet(delegate:CustomBottomSheetViewControllerProtocol) {
+        let vc = self.storyboard?.instantiateViewController(identifier: "customBottomSheet") as! CustomBottomSheetViewController
+        vc.delegate = delegate
+        vc.bottomSheetType = .MEDIUM
+        modalPresentationStyle = .overCurrentContext
+        
+        
+        DIMMED_VIEW.backgroundColor = .black
+        DIMMED_VIEW.alpha = 0.6
+        DIMMED_VIEW.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(DIMMED_VIEW)
+        DIMMED_VIEW.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+        DIMMED_VIEW.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+        DIMMED_VIEW.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+        DIMMED_VIEW.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
+
+        
+        present(vc, animated: true, completion: {
+            //self.backgroundView.isHidden = true
+        })
+    }
+    
+    func removeDimmedView() {
+        //dimmedView.removeFromSuperview()
+    }
 }
 

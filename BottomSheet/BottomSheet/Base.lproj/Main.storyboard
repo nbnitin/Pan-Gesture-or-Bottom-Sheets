@@ -22,17 +22,17 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2qo-fs-tBk">
-                                <rect key="frame" x="173.5" y="459.5" width="67" height="31"/>
+                                <rect key="frame" x="142.5" y="459.5" width="129.5" height="31"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Sheet Controller"/>
                                 <connections>
                                     <action selector="presentBottomSheet:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MPd-tv-H3J"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I8r-1U-02c">
-                                <rect key="frame" x="173.5" y="498.5" width="67" height="31"/>
+                                <rect key="frame" x="124" y="498.5" width="166.5" height="31"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Custom Bottom Sheet"/>
                                 <connections>
                                     <action selector="showCustomBottomSheetAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dAp-tZ-c7X"/>
                                 </connections>
@@ -68,9 +68,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view hidden="YES" alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="caH-WJ-zwi">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="caH-WJ-zwi">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A08-uh-IWq">
                                 <rect key="frame" x="0.0" y="896" width="414" height="0.0"/>
@@ -101,6 +101,7 @@
                     <connections>
                         <outlet property="containerView" destination="A08-uh-IWq" id="QNc-Tl-5St"/>
                         <outlet property="containerViewHeightConstraint" destination="bl5-x7-GbA" id="Nqf-fA-2vZ"/>
+                        <outlet property="touchView" destination="caH-WJ-zwi" id="Vfe-eh-6Dz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zfo-dV-eus" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
